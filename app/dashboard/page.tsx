@@ -55,6 +55,7 @@ export default function AdminDashboard() {
   const [shipments, setShipments] = useState(mockShipments);
   const [editingShipment, setEditingShipment] = useState<any>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
@@ -129,11 +130,8 @@ export default function AdminDashboard() {
     );
   }
 
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  // ... handleLogin, handleUpdateStatus, etc.
 
-  // ... if (!isLoggedIn) return ...
 
   return (
     <main className="min-h-screen bg-brand-dark flex">
