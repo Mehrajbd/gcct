@@ -6,6 +6,7 @@ import { HeroSection } from "@/components/home/HeroSection";
 import { StatsBar } from "@/components/home/StatsBar";
 import { HowItWorks } from "@/components/home/HowItWorks";
 import { ServicesGrid } from "@/components/home/ServicesGrid";
+import { SustainabilityHub } from "@/components/home/SustainabilityHub";
 import { GlobalNetwork } from "@/components/home/GlobalNetwork";
 import { motion } from "framer-motion";
 
@@ -23,6 +24,7 @@ export default function Home() {
         <StatsBar />
         <ServicesGrid />
         <HowItWorks />
+        <SustainabilityHub />
         <GlobalNetwork />
       </motion.div>
 

@@ -5,7 +5,8 @@ import { SectionHeader } from "@/components/ui/SectionHeader";
 import { 
   FileText, Truck, PackageCheck, LocateFixed, 
   Warehouse, ClipboardCheck, Container, 
-  Ship, Anchor, MapPin, Globe, CheckCircle2 
+  Ship, Anchor, MapPin, Globe, CheckCircle2,
+  ArrowRight, ArrowDown
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -38,28 +39,35 @@ export function HowItWorks() {
 
         <div className="mt-20">
           {/* Mobile/Tablet Layout: Vertical List */}
-          <div className="lg:hidden space-y-4">
+          <div className="lg:hidden space-y-2">
             {steps.map((step, i) => (
-              <motion.div
-                key={step.id}
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ delay: i * 0.05 }}
-                className="flex items-center gap-4 p-4 bg-brand-surface border border-white-10 rounded-2xl relative"
-              >
-                <div className="shrink-0 w-12 h-12 rounded-xl bg-green-500/10 flex items-center justify-center text-green-500 font-display font-black text-xl">
-                  {step.id}
-                </div>
-                <div className="flex-1">
-                  <h4 className="text-white font-bold leading-tight">{step.label}</h4>
-                </div>
-                <div className="text-white-20">
-                  <step.icon size={20} />
-                </div>
+              <div key={step.id} className="flex flex-col items-center">
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ delay: i * 0.05 }}
+                  className="w-full flex items-center gap-4 p-4 bg-brand-surface border border-white-10 rounded-2xl relative"
+                >
+                  <div className="shrink-0 w-12 h-12 rounded-xl bg-green-500/10 flex items-center justify-center text-green-500 font-display font-black text-xl">
+                    {step.id}
+                  </div>
+                  <div className="flex-1">
+                    <h4 className="text-white font-bold leading-tight">{step.label}</h4>
+                  </div>
+                  <div className="text-white-20">
+                    <step.icon size={20} />
+                  </div>
+                </motion.div>
                 {i < steps.length - 1 && (
-                  <div className="absolute left-10 top-16 w-[1px] h-4 bg-green-500/30" />
+                  <motion.div 
+                    initial={{ scale: 0 }}
+                    whileInView={{ scale: 1 }}
+                    className="py-2 text-green-500/30"
+                  >
+                    <ArrowDown size={20} />
+                  </motion.div>
                 )}
-              </motion.div>
+              </div>
             ))}
           </div>
 
@@ -67,7 +75,7 @@ export function HowItWorks() {
           <div className="hidden lg:block space-y-16">
             {/* Row 1 (Steps 1-5) */}
             <div className="flex justify-between items-start px-12 relative">
-              <RowConnector className="top-8 left-[10%] right-[10%]" />
+              <RowConnector className="top-8 left-[10%] right-[10%]" direction="right" />
               {steps.slice(0, 5).map((step, i) => (
                 <StepNode key={step.id} step={step} index={i} totalInRow={5} />
               ))}
@@ -76,7 +84,7 @@ export function HowItWorks() {
 
             {/* Row 2 (Steps 6-10) - Reversed */}
             <div className="flex flex-row-reverse justify-between items-start px-12 relative">
-              <RowConnector className="top-8 left-[10%] right-[10%]" />
+              <RowConnector className="top-8 left-[10%] right-[10%]" direction="left" />
               {steps.slice(5, 10).map((step, i) => (
                 <StepNode key={step.id} step={step} index={i} totalInRow={5} />
               ))}
@@ -84,7 +92,7 @@ export function HowItWorks() {
             </div>
 
             {/* Row 3 (Steps 11-13) */}
-            <div className="flex justify-start gap-[12%] items-start px-12">
+            <div className="flex justify-start gap-[12%] items-start px-12 pt-4">
               {steps.slice(10).map((step, i) => (
                 <StepNode key={step.id} step={step} index={i} totalInRow={5} />
               ))}
@@ -96,9 +104,22 @@ export function HowItWorks() {
   );
 }
 
-function RowConnector({ className }: { className: string }) {
+function RowConnector({ className, direction }: { className: string, direction: 'left' | 'right' }) {
   return (
-    <div className={cn("absolute h-[1px] bg-green-500/20 z-0", className)} />
+    <div className={cn("absolute h-[1px] bg-green-500/20 z-0 flex items-center justify-center", className)}>
+       <div className="w-full h-full relative">
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className={cn(
+              "absolute top-1/2 -translate-y-1/2 text-green-500/40",
+              direction === 'right' ? "right-[-10px]" : "left-[-10px] rotate-180"
+            )}
+          >
+             <ArrowRight size={16} />
+          </motion.div>
+       </div>
+    </div>
   );
 }
 

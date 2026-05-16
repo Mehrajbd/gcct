@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/Button";
 import { GreenDot } from "@/components/ui/GreenDot";
 import { Badge } from "@/components/ui/Badge";
 import { GlassCard } from "@/components/ui/GlassCard";
+import { RotatingGlobe } from "@/components/ui/RotatingGlobe";
 import { ArrowRight, Box, MoveRight } from "lucide-react";
 
 export function HeroSection() {
@@ -49,6 +50,11 @@ export function HeroSection() {
         {/* Scan Line */}
         <div className="scan-line top-0 opacity-10" />
         
+        {/* Rotating Globe Background */}
+        <div className="absolute -right-20 md:right-0 top-1/2 -translate-y-1/2 overflow-visible">
+           <RotatingGlobe />
+        </div>
+        
         {/* Particles */}
         {particles.map((p, i) => (
           <motion.div
@@ -80,10 +86,7 @@ export function HeroSection() {
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           className="max-w-2xl"
         >
-          <div className="mb-6">
-            <Badge status="live" />
-          </div>
-          
+
           <h1 className="text-5xl lg:text-7xl font-display font-extrabold text-white-100 leading-tight mb-6">
             From Factory to Buyer.<br />
             <span className="text-green-400">Without Blind Spots.</span>
